@@ -19,7 +19,16 @@ const resolvers = {
 // ######################
 
 // ### SERVER ##########
-const server = new ApolloServer ({ typeDefs, resolvers });
+const server = new ApolloServer ({
+    typeDefs,
+    resolvers,
+    context: ({ req }) => {
+        const token = req.headers.authorization
+        return {
+            token
+        }
+    }
+});
 
 server.listen(PORT)
     .then(console.log(`Server running on port ${PORT}`));

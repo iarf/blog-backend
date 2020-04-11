@@ -1,4 +1,4 @@
-const { APP_SECRET } = require('../utils');
+const { APP_SECRET, authUser } = require('../utils');
 const bcrypt = require('bcrypt');
 const { PrismaClient } = require('@prisma/client');
 const jwt = require('jsonwebtoken')
@@ -37,8 +37,21 @@ const login = async (parent,args,context,info) => {
         user,
     }
 }
+const post = async (parent,args,context,info) => {
+    await authUser(context);
+    await prisma.post.create({
+        data: {
+            title: args.title,
+            content: args.content,
+            thumbnail: args.thumbnail,
+            posted: args.posted
+        }
+    });
+    return('Post created');
+}
 
 module.exports = {
     signup,
     login,
+    post
 }
