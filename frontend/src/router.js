@@ -7,7 +7,7 @@ const routes = [
     {
         path: '/admin',
         name: 'Admin Panel',
-        component: () => import('./views/admin.vue')
+        component: () => import('./views/Admin.vue')
     }
 ];
 
