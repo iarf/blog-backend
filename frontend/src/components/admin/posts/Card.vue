@@ -1,8 +1,8 @@
 <template>
 	<b-row class="post-card">
 		<b-col>
-		<a href="#" class="delete" @click="deletePost"><i class="fas fa-trash fa-lg"></i></a>
-		<a href="#"><span class="title">{{title}}</span></a>
+		<a href="#" class="delete" v-on:click="deletePost"><i class="fas fa-trash fa-lg"></i></a>
+		<a href="#" v-on:click="openEdit"><span class="title">{{title}}</span></a>
 		</b-col>
 		<b-col class="date-col">
 		<span class="date text-muted">{{date}}</span>
@@ -20,6 +20,12 @@ export default {
 		'post_id'
 	],
 	methods: {
+		openEdit(){
+			this.$store.commit('navigate',{
+				page: 'EditPost',
+				post_id: this.post_id
+			});
+		},
 		async deletePost(){
 			console.log(this.post_id)
 			const result = await this.$apollo.mutate({

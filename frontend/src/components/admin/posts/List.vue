@@ -1,7 +1,7 @@
 <template>
   <b-row class="post-list">
 		<div class="cards">
-			<Card v-for="post in posts" :key="post.id" :post_id="post.post_id" :title="post.title" :date="post.posted"></Card>
+			<Card v-for="post in posts" :key="post.post_id" :post_id="post.post_id" :title="post.title" :date="post.posted"></Card>
 		</div>
   </b-row>
 </template>

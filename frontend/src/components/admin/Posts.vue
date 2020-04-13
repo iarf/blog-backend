@@ -4,14 +4,14 @@
       <b-form inline class="search-wrap">
         <b-input id="search" placeholder="Search all posts" class="search"></b-input>
       </b-form>
-			<a href="#" class="add-post" @click="$emit('addPost')"><i class="far fa-plus-square"></i></a>
+			<a href="#" class="add-post" @click="$store.commit('navigate',{page:'MakePost'})"><i class="far fa-plus-square"></i></a>
     </div>
-		<List></List>
+		<List @edit="openEdit()"></List>
 	</div>
 </template>
 
 <script>
-import List from './posts/List'
+import List from './posts/List';
 export default {
 	components: {
 		List

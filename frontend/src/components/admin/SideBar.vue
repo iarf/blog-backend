@@ -5,7 +5,7 @@
 			<hr>
 		</div>
 		<ul class="controls">
-			<a v-for="tab in tabs" :key="tab"><li v-on:click="navEmit(tab)">{{tab}}</li></a>
+			<a v-for="tab in tabs" :key="tab"><li v-on:click="$store.commit('navigate',{page:tab})">{{tab}}</li></a>
 		</ul>
 		<div class="user">
 			<p>Ian Flom <a href="#"><i class="fas fa-door-open"></i></a></p>
@@ -45,6 +45,10 @@ export default {
 			padding: 12px
 			padding-bottom: 0
 			width: 100%
+			a
+				color: #ada6ad
+				&:hover
+					color: white
 			i
 				position: absolute
 				right: 12px
@@ -67,4 +71,6 @@ export default {
 					cursor: pointer
 			a
 				color: #ada6ad
+				&:hover
+					color: white
 </style>
