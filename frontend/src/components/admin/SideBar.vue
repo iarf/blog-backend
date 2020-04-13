@@ -5,8 +5,7 @@
 			<hr>
 		</div>
 		<ul class="controls">
-			<a href="#"><li>Posts</li></a>
-			<a href="#"><li>Users</li></a>
+			<a v-for="tab in tabs" :key="tab" href="#"><li>{{tab}}</li></a>
 		</ul>
 		<div class="user">
 			<p>Ian Flom <a href="#"><i class="fas fa-door-open"></i></a></p>
@@ -15,7 +14,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+	data(){
+		return {
+			tabs: ['Posts', 'Users']
+		}
+	}
+};
 </script>
 
 <style lang="sass" scoped>
