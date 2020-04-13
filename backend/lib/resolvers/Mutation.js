@@ -47,11 +47,21 @@ const post = async (parent,args,context,info) => {
             posted: args.posted
         }
     });
-    return('Post created');
+    return('Post created.');
+}
+const deletePost = async (parent,args,context,info) => {
+    await authUser(context);
+    await prisma.post.delete({
+        where: {
+            post_id: parseInt(args.post_id)
+        }
+    })
+    return('Post deleted.')
 }
 
 module.exports = {
     signup,
     login,
-    post
+    post,
+    deletePost
 }

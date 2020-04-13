@@ -41,7 +41,7 @@ export default {
 					content: content
 				}
 			});
-			console.log(result);
+			alert(result.data.post);
 
 		}
 	}

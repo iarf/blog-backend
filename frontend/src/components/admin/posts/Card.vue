@@ -1,7 +1,7 @@
 <template>
 	<b-row class="post-card">
 		<b-col>
-		<a href="#" class="delete"><i class="fas fa-trash fa-lg"></i></a>
+		<a href="#" class="delete" @click="deletePost"><i class="fas fa-trash fa-lg"></i></a>
 		<a href="#"><span class="title">{{title}}</span></a>
 		</b-col>
 		<b-col class="date-col">
@@ -11,11 +11,28 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
+
 export default {
 	props: [
 		'title',
-		'date'
-	]
+		'date',
+		'post_id'
+	],
+	methods: {
+		async deletePost(){
+			console.log(this.post_id)
+			const result = await this.$apollo.mutate({
+				mutation: gql`mutation($post_id: ID!){
+					deletePost(post_id: $post_id)
+				}`,
+				variables: {
+					post_id: this.post_id
+				}
+			});
+			alert(result.data.deletePost);
+		}
+	}
 };
 </script>
 
