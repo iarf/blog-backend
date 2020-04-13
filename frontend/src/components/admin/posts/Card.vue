@@ -2,7 +2,7 @@
 	<b-row class="post-card">
 		<b-col>
 		<a href="#" class="delete"><i class="fas fa-trash fa-lg"></i></a>
-		<span class="title">{{title}}</span>
+		<a href="#"><span class="title">{{title}}</span></a>
 		</b-col>
 		<b-col class="date-col">
 		<span class="date text-muted">{{date}}</span>

@@ -1,12 +1,7 @@
 <template>
   <b-row class="post-list">
-    <div class="menu-bar">
-      <b-form inline>
-        <b-input id="search" placeholder="Search all posts" class="search"></b-input>
-      </b-form>
-    </div>
 		<div class="cards">
-			<Card v-for="post in posts" :key="post" :title="post.title" :date="post.posted"></Card>
+			<Card v-for="post in posts" :key="post.id" :title="post.title" :date="post.posted"></Card>
 		</div>
   </b-row>
 </template>
@@ -25,6 +20,7 @@ export default {
 				posts {
 					title
 					posted
+					post_id
 				}
 			}`
 		}
@@ -36,13 +32,6 @@ export default {
 .post-list
 .cards
 	width: 100%
-.menu-bar
-	background: #ababab
-	width: 100%
-	padding: 10px
-	.search
-		width: 60%
-		margin: auto
 
 		
 </style>

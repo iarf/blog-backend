@@ -5,7 +5,7 @@
 			<hr>
 		</div>
 		<ul class="controls">
-			<a v-for="tab in tabs" :key="tab" href="#"><li>{{tab}}</li></a>
+			<a v-for="tab in tabs" :key="tab"><li v-on:click="navEmit(tab)">{{tab}}</li></a>
 		</ul>
 		<div class="user">
 			<p>Ian Flom <a href="#"><i class="fas fa-door-open"></i></a></p>
@@ -18,6 +18,11 @@ export default {
 	data(){
 		return {
 			tabs: ['Posts', 'Users']
+		}
+	},
+	methods: {
+		navEmit(tab){
+			this.$emit('navigate',tab);
 		}
 	}
 };
@@ -59,6 +64,7 @@ export default {
 				margin: 1px
 				&:hover
 					background: #3b3342
+					cursor: pointer
 			a
 				color: #ada6ad
 </style>

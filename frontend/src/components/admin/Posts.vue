@@ -1,5 +1,11 @@
 <template>
 	<div class="posts">
+    <div class="menu-bar">
+      <b-form inline class="search-wrap">
+        <b-input id="search" placeholder="Search all posts" class="search"></b-input>
+      </b-form>
+			<a href="#" class="add-post" @click="$emit('addPost')"><i class="far fa-plus-square"></i></a>
+    </div>
 		<List></List>
 	</div>
 </template>
@@ -13,6 +19,20 @@ export default {
 };
 </script>
 
-<style>
+<style lang="sass" scoped>
+.menu-bar
+	background: #ababab
+	width: calc(100% + 30px)
+	position: relative
+	right: 15px
+	padding: 10px
+	.add-post
+		float: right
+		font-size: 1.6em
+	.search-wrap
+		display: inline
+	.search
+		width: 60%
+
 
 </style>
