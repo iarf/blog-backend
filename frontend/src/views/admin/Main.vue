@@ -39,7 +39,10 @@ export default {
     };
   },
   async created() {
-		
+		const ver = await this.checkUser();
+		if (ver){
+			this.authenticated = true;
+		}
   },
   methods: {
     async checkUser() {
@@ -55,9 +58,7 @@ export default {
       });
       const user = response.data.getUser;
 			this.$store.commit("setUser", user);
-			if (user){
-				return true;
-			}
+			return true;
     },
     navigate(page) {
       this.$store.commit("navigate", {
