@@ -7,7 +7,8 @@ export const store = new Vuex.Store({
 	state: {
 		page: {
 			component: 'Posts'
-		}
+		},
+		user: {}
 	},
 	mutations: {
 		navigate(state,payload){
@@ -16,6 +17,10 @@ export const store = new Vuex.Store({
 				console.log(payload.post_id)
 			}
 			state.page.component = payload.page;			
+		},
+		setUser(state,user){
+			console.log(user)
+			state.user = user;
 		}
 	}
 });

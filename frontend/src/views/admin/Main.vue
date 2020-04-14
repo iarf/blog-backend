@@ -1,61 +1,74 @@
 <template>
-  <div class="admin-panel">
-		<SideBar @navigate="navigate"></SideBar>
-		<b-container class="page">
-			<transition name="fade">
-				<component :is="$store.state.page.component" @open-edit="openEdit" class="component-wrap"></component>
-			</transition>
-		</b-container>		
+<div class="wrap">
+  <div class="admin-panel" v-if="authenticated">
+    <SideBar @navigate="navigate"></SideBar>
+    <b-container class="page">
+      <transition name="fade">
+        <component :is="$store.state.page.component" @open-edit="openEdit" class="component-wrap"></component>
+      </transition>
+    </b-container>
+  </div>
+	<div v-else>
+		<h1>You don't seem to be signed in.</h1>
+		<router-link to="/admin/login"><h2>(but we can fix that)</h2></router-link>
 	</div>
+</div>
 </template>
 
 <script>
-import gql from 'graphql-tag'
+import gql from "graphql-tag";
 
-import SideBar from '../../components/admin/SideBar'
-import Posts from '../../components/admin/Posts'
-import Users from '../../components/admin/Users'
-import MakePost from '../../components/admin/posts/MakePost'
-import EditPost from '../../components/admin/posts/EditPost'
+import SideBar from "../../components/admin/SideBar";
+import Posts from "../../components/admin/Posts";
+import Users from "../../components/admin/Users";
+import MakePost from "../../components/admin/posts/MakePost";
+import EditPost from "../../components/admin/posts/EditPost";
 
 export default {
-	components: {
-		MakePost,
-		SideBar,
-		Posts,
-		Users,
-		EditPost
-	},
-	async created(){
-		await this.checkUser();
-	},
-	methods: {
-		async checkUser(){
-			const response = await this.$apollo.mutate({
-				mutation: gql`mutation{
-					getUser{
-						first_name
-						last_name
-					}
-				}`
-			});
-			console.log(response);
-		},
-		navigate(page){
-			this.$store.commit('navigate',{
-				page:page
-			})
-		},
-		openEdit(post_id){
-			console.log(post_id)
-			console.log('editor')
-		}
-	},
-	events: {
-		openEdit: function(){
-			console.log('success')
-		}
-	}
+  components: {
+    MakePost,
+    SideBar,
+    Posts,
+    Users,
+    EditPost
+  },
+  data() {
+    return {
+			user: "",
+			authenticated: false
+    };
+  },
+  async created() {
+		
+  },
+  methods: {
+    async checkUser() {
+      const response = await this.$apollo.mutate({
+        mutation: gql`
+          mutation {
+            getUser {
+              first_name
+              last_name
+            }
+          }
+        `
+      });
+      const user = response.data.getUser;
+			this.$store.commit("setUser", user);
+			if (user){
+				return true;
+			}
+    },
+    navigate(page) {
+      this.$store.commit("navigate", {
+        page: page
+      });
+    },
+    openEdit(post_id) {
+      console.log(post_id);
+      console.log("editor");
+    }
+  }
 };
 </script>
 

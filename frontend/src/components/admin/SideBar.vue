@@ -8,7 +8,7 @@
 			<a v-for="tab in tabs" :key="tab"><li v-on:click="$store.commit('navigate',{page:tab})">{{tab}}</li></a>
 		</ul>
 		<div class="user">
-			<p>Ian Flom <router-link to="/admin/login" @click="signout"><i class="fas fa-door-open"></i></router-link></p>
+			<p>{{$store.state.user.first_name + ' ' + $store.state.user.last_name}}<a href="#" @click="signout"><i class="fas fa-door-open"></i></a></p>
 		</div>
 	</div>
 </template>
@@ -23,6 +23,7 @@ export default {
 	methods: {
 		signout(){
 			localStorage.removeItem('apollo-token');
+			console.log('signed out')
 		},
 		navEmit(tab){
 			this.$emit('navigate',tab);
