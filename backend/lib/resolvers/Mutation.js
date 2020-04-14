@@ -31,11 +31,16 @@ const login = async (parent,args,context,info) => {
     if (!valid){
         throw new Error('Password invalid');
     }
-    const token = await jwt.sign({ user_id: user.userId }, APP_SECRET);
+    const token = await jwt.sign({ user_id: user.user_id }, APP_SECRET);
     return {
         token,
         user,
     }
+}
+const getUser = async (parent,args,context,info) => {
+    const userId = await authUser(context);
+    const user = await prisma.user.findOne({ where: {user_id: parseInt(userId)} });
+    return user;
 }
 const post = async (parent,args,context,info) => {
     await authUser(context);
@@ -78,5 +83,6 @@ module.exports = {
     login,
     post,
     deletePost,
-    updatePost
+    updatePost,
+    getUser
 }

@@ -1,14 +1,14 @@
 <template>
 	<div class="sidebar">
 		<div>
-			<h1>My project</h1>
+			<h1>CMS Admin</h1>
 			<hr>
 		</div>
 		<ul class="controls">
 			<a v-for="tab in tabs" :key="tab"><li v-on:click="$store.commit('navigate',{page:tab})">{{tab}}</li></a>
 		</ul>
 		<div class="user">
-			<p>Ian Flom <a href="#"><i class="fas fa-door-open"></i></a></p>
+			<p>Ian Flom <router-link to="/admin/login" @click="signout"><i class="fas fa-door-open"></i></router-link></p>
 		</div>
 	</div>
 </template>
@@ -21,6 +21,9 @@ export default {
 		}
 	},
 	methods: {
+		signout(){
+			localStorage.removeItem('apollo-token');
+		},
 		navEmit(tab){
 			this.$emit('navigate',tab);
 		}

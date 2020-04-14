@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
+
 import SideBar from '../../components/admin/SideBar'
 import Posts from '../../components/admin/Posts'
 import Users from '../../components/admin/Users'
@@ -24,7 +26,21 @@ export default {
 		Users,
 		EditPost
 	},
+	async created(){
+		await this.checkUser();
+	},
 	methods: {
+		async checkUser(){
+			const response = await this.$apollo.mutate({
+				mutation: gql`mutation{
+					getUser{
+						first_name
+						last_name
+					}
+				}`
+			});
+			console.log(response);
+		},
 		navigate(page){
 			this.$store.commit('navigate',{
 				page:page

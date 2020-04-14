@@ -6,8 +6,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
 	state: {
 		page: {
-			component: 'EditPost',
-			post_id: 2
+			component: 'Posts'
 		}
 	},
 	mutations: {
