@@ -16,7 +16,7 @@
       <br />
       <b-form-textarea placeholder="Post content..." rows="14" class="content" name="content" :value="post.content"></b-form-textarea>
 			<div class="buttons">
-				<b-button variant="danger" type="cancel">Cancel</b-button>
+				<b-button variant="danger" type="button" @click="$store.commit('navigate',{page:'Posts'})">Cancel</b-button>
 				<b-button variant="success" type="submit">Update</b-button>
 			</div>
     </b-form>
@@ -83,7 +83,10 @@ export default {
 					posted: posted
 				}
 			});
-			console.log(result.data);
+			alert(result.data.updatePost)
+			this.$store.commit('navigate',{
+				page: 'Posts'
+			});
 		}
 	}
 };

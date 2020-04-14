@@ -33,10 +33,11 @@ export default {
 		width: 260px
 		height: 100vh
 		position: fixed
-		background: #463c4d
+		background: #302536
 		color: #c9c9c9
 		text-align: left
 		padding: 20px
+		border-right: 1px solid #85778c
 		.user
 			position: absolute
 			bottom: 0

@@ -3,7 +3,7 @@
 		<SideBar @navigate="navigate"></SideBar>
 		<b-container class="page">
 			<transition name="fade">
-				<component :is="$store.state.page.component" @open-edit="openEdit"></component>
+				<component :is="$store.state.page.component" @open-edit="openEdit" class="component-wrap"></component>
 			</transition>
 		</b-container>		
 	</div>
@@ -44,17 +44,27 @@ export default {
 </script>
 
 <style lang="sass">
-	.fade-enter, .fade-leave-to
-		opacity: 0
-	.fade-enter-to, .fade-leave
-		opacity: 1
-	.fade-enter-active
-		transition-duration: .5s
-		transition-delay: .5s
-	.fade-leave-active
-		transition-duration: .2s
 
-	.page
-		width: calc(100% - 260px)
-		margin-left: 260px
+.admin-panel
+	*
+		transition: all .1s ease-in-out
+
+.fade-enter, .fade-leave-to
+	opacity: 0
+.fade-enter-to, .fade-leave
+	opacity: 1
+.fade-enter-active
+	transition: all .5 ease-in
+	transition-delay: .5s
+	position: absolute
+.fade-leave-active
+	transition-duration: .2s
+	transition: all .4s ease-out
+	position: absolute
+	width: 100%
+
+.page
+	width: calc(100% - 260px)
+	margin-left: 260px
+	position: relative
 </style>
