@@ -16,19 +16,20 @@ export default {
 		List
 	},
 	methods: {
-		async postSearch(term){
-			this.posts = await this.$apollo.query({
+		async postSearch(e){
+			const response = await this.$apollo.query({
 				query: gql`query($term: String){
-					postSearch($term)
+					posts(filter: $term){
 						title
 						posted
 						post_id
+					}
 				}`,
-				variables:{
-					term: term
+				variables: {
+					term: e
 				}
-				
-			})
+			});
+			this.posts = response.data.posts;
 		}
 
 	},

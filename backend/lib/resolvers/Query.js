@@ -9,7 +9,10 @@ const post = async (parent,args,context,info) => {
     return post;
 }
 const posts = async (parent,args,context,info) => {
-    const posts = prisma.post.findMany();
+    const posts = await prisma.post.findMany({
+        where:{title:{contains:args.filter}}
+    })
+    console.log(posts)
     return posts;
 }
 
