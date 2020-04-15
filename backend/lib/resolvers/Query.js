@@ -16,12 +16,13 @@ const posts = async (parent,args,context,info) => {
 }
 const users = async (parent,args,context,info) => {
     const users = await prisma.user.findMany({
-        select:{
+        select:{ // ensure password not returned
             user_id: true,
             email: true,
             first_name: true,
             last_name: true,
-        }
+        },
+        where: {first_name:{contains:args.filter}}
     });
     return users;
 }

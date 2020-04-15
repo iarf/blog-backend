@@ -1,7 +1,7 @@
 type Query{
     post(post_id: ID!): Post
     posts(filter: String): [Post]
-    users: [User]
+    users(filter: String): [User]
 }
 type Mutation{
     signup(email: String!, password: String!, first_name: String, last_name: String): String
@@ -11,6 +11,7 @@ type Mutation{
     updatePost(post_id: ID!, title: String!, content: String!, posted: String): String
     getUser: User
     checkAuth: String
+    deleteUser(user_id: String): String
 }
 
 #payloads

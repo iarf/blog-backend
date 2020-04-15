@@ -28,7 +28,7 @@ export default {
 		},
 		async deletePost(){
 			console.log(this.post_id)
-			const result = await this.$apollo.mutate({
+			const response = await this.$apollo.mutate({
 				mutation: gql`mutation($post_id: ID!){
 					deletePost(post_id: $post_id)
 				}`,
@@ -36,7 +36,7 @@ export default {
 					post_id: this.post_id
 				}
 			});
-			alert(result.data.deletePost);
+			alert(response.data.deletePost);
 		}
 	}
 };
