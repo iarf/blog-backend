@@ -1,20 +1,47 @@
 <template>
 	<div class="posts">
     <div class="menu-bar">
-      <b-form inline class="search-wrap">
-        <b-input id="search" placeholder="Search all posts" class="search"></b-input>
-      </b-form>
+        <b-input id="search" placeholder="Search all posts" class="search" @change="postSearch"></b-input>
 			<a href="#" class="add-post" @click="$store.commit('navigate',{page:'MakePost'})"><i class="far fa-plus-square"></i></a>
     </div>
-		<List @edit="openEdit()"></List>
+		<List :posts="posts"></List>
 	</div>
 </template>
 
 <script>
 import List from './posts/List';
+import gql from 'graphql-tag';
 export default {
 	components: {
 		List
+	},
+	methods: {
+		async postSearch(term){
+			this.posts = await this.$apollo.query({
+				query: gql`query($term: String){
+					postSearch($term)
+						title
+						posted
+						post_id
+				}`,
+				variables:{
+					term: term
+				}
+				
+			})
+		}
+
+	},
+	apollo: {
+		posts: {
+			query: gql`{
+				posts {
+					title
+					posted
+					post_id
+				}
+			}`
+		}
 	}
 };
 </script>
@@ -34,10 +61,9 @@ export default {
 	.add-post
 		float: right
 		font-size: 1.6em
-	.search-wrap
-		display: inline
 	.search
 		width: 60%
+		display: inline
 
 
 </style>

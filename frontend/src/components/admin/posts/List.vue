@@ -7,24 +7,15 @@
 </template>
 
 <script>
-import gql from 'graphql-tag'
 
 import Card from './Card'
 export default {
 	components: {
 		Card
 	},
-	apollo: {
-		posts: {
-			query: gql`{
-				posts {
-					title
-					posted
-					post_id
-				}
-			}`
-		}
-	}
+	props: [
+		'posts'
+	]
 };
 </script>
 

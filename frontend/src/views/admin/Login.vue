@@ -60,6 +60,7 @@ export default {
 			}
 			else {
 				await window.localStorage.setItem('apollo-token',result.data.login.token);
+				this.$router.push('admin');
 			}
 		}
 	}
