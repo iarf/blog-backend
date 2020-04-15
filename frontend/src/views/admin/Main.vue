@@ -1,5 +1,4 @@
 <template>
-<div class="wrap">
   <div class="admin-panel" v-if="authenticated">
     <SideBar @navigate="navigate"></SideBar>
     <b-container class="page">
@@ -8,11 +7,6 @@
       </transition>
     </b-container>
   </div>
-	<div v-else>
-		<h1>You don't seem to be signed in.</h1>
-		<router-link to="/admin/login"><h2>(but we can fix that)</h2></router-link>
-	</div>
-</div>
 </template>
 
 <script>
