@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import { apolloClient } from './apollo-client';
+import gql from 'graphql-tag';
 
 Vue.use(VueRouter);
 
@@ -19,11 +21,24 @@ const routes = [
 
 const router = new VueRouter({ routes });
 
-router.beforeEach((to,from,next) => {
+router.beforeEach(async (to,from,next) => {
     if (to.matched.some(record => record.meta.requiresAuth)){
         if (localStorage.getItem('apollo-token') == null){
             next({name: 'Login'});
-        }else next();
+        }else {
+            const isAuthenticated = await apolloClient.mutate({
+                mutation: gql`mutation{
+                    checkAuth
+                }`
+            });
+            if(isAuthenticated.data.checkAuth){
+                //user is authenticated
+                next();
+            }else {
+                localStorage.removeItem('apollo-token');
+                next({name:'Login'});
+            }
+        }
     }
     else next();
 })

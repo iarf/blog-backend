@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import App from './App.vue';
 import router from './router';
 import './plugins/bootstrap-vue';
-import apolloProvider from './apollo-client';
+import { apolloProvider } from './apollo-client';
 import { store } from './store';
 
 Vue.config.productionTip = false;

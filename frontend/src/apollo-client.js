@@ -22,15 +22,25 @@ const link = new HttpLink({
   headers: getHeaders()
 });
 
+
 const apolloClient = new ApolloClient({
   link: link,
   cache: new InMemoryCache({
     addTypename: true
   }),
+  defaultOptions: {
+    mutate: {
+      errorPolicy: "ignore"
+    }
+  }
 });
+
 
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient
 });
 
-export default apolloProvider;
+export {
+  apolloProvider,
+  apolloClient
+}
