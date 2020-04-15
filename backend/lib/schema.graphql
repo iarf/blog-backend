@@ -1,6 +1,7 @@
 type Query{
     post(post_id: ID!): Post
     posts(filter: String): [Post]
+    users: [User]
 }
 type Mutation{
     signup(email: String!, password: String!, first_name: String, last_name: String): String
