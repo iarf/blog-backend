@@ -5,9 +5,9 @@
         <b-col>
           <div class="login-card">
             <h1>Admin Panel</h1>
-            <hr />
+            <hr>
             <p>Please sign in</p>
-						<!-- pw12345 -->
+			<p v-if="invalid" style="color:red;">Invalid email or password</p>
             <b-form @submit.prevent="signIn">
               <!-- email -->
               <b-form-group label="Email" label-for="email">
@@ -32,6 +32,11 @@
 import gql from "graphql-tag";
 
 export default {
+	data(){
+		return {
+			invalid: false
+		}
+	},
 	methods: {
 		async signIn(e){
 			const email = e.target.elements.email.value;
@@ -49,9 +54,13 @@ export default {
 					email: email,
 					password: password
 				}
-			})
-			const token = result.data.login.token
-			window.localStorage.setItem('apollo-token', token);
+			});
+			if (result.data.login == null){
+				this.invalid = true;
+			}
+			else {
+				await window.localStorage.setItem('apollo-token',result.data.login.token);
+			}
 		}
 	}
 };

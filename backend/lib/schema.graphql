@@ -9,6 +9,7 @@ type Mutation{
     deletePost(post_id: ID!): String
     updatePost(post_id: ID!, title: String!, content: String!, posted: String): String
     getUser: User
+    checkAuth: String
 }
 
 #payloads

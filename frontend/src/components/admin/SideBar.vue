@@ -23,7 +23,7 @@ export default {
 	methods: {
 		signout(){
 			localStorage.removeItem('apollo-token');
-			console.log('signed out')
+			this.$router.push('login');
 		},
 		navEmit(tab){
 			this.$emit('navigate',tab);

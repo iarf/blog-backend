@@ -42,6 +42,16 @@ const getUser = async (parent,args,context,info) => {
     const user = await prisma.user.findOne({ where: {user_id: parseInt(userId)} });
     return user;
 }
+const checkAuth = async(parent,args,context,info) => {
+    const token = context.token.replace('Bearer ','');
+    const { user_id } = jwt.verify(token,APP_SECRET);
+    if (user_id != null){
+        //check perms here if they get added later
+        return true;
+    }else{
+        return false;
+    }
+}
 const post = async (parent,args,context,info) => {
     await authUser(context);
     await prisma.post.create({
@@ -84,5 +94,6 @@ module.exports = {
     post,
     deletePost,
     updatePost,
-    getUser
+    getUser,
+    checkAuth
 }

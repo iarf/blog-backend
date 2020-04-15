@@ -30,7 +30,7 @@ const apolloClient = new ApolloClient({
   }),
   defaultOptions: {
     mutate: {
-      errorPolicy: "ignore"
+      errorPolicy: "all"
     }
   }
 });

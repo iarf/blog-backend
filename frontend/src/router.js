@@ -35,7 +35,7 @@ router.beforeEach(async (to,from,next) => {
                 //user is authenticated
                 next();
             }else {
-                localStorage.removeItem('apollo-token');
+                console.log(isAuthenticated)
                 next({name:'Login'});
             }
         }
